@@ -43,9 +43,9 @@ def apply_diff_to_branch(target_branch, diff):
     with open(json_file_path, "w") as f:
         f.write(json.dumps(data))
 
+    execute_command("rm temp_diff.txt")
     execute_command(f"git add .")
     execute_command(f"git commit -m 'Applied changes from diff'")
-    execute_command("rm temp_diff.txt")
 
 if __name__ == "__main__":
     BASE_BRANCH = 'main'
