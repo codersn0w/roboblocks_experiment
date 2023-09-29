@@ -1,0 +1,17 @@
+45c45,58
+<             "blocks": {},
+---
+>             "blocks": {
+>                 "Ftxg66]Ish{.@]fQD};:": {
+>                     "id": "Ftxg66]Ish{.@]fQD};:",
+>                     "opcode": "event_whenflagclicked",
+>                     "inputs": {},
+>                     "fields": {},
+>                     "next": null,
+>                     "topLevel": true,
+>                     "parent": null,
+>                     "shadow": false,
+>                     "x": 32.74074074074315,
+>                     "y": -1675.5555555555554
+>                 }
+>             },
