@@ -1,11 +1,9 @@
 import subprocess
 import json
 
-def execute_command(command):
+def execute_command(command, check_returncode=True):
     """コマンドを実行してその出力を返す関数"""
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
-    if result.returncode != 0:
-        raise Exception(result.stderr)
     return result.stdout.strip()
 
 def pretty_json(branch, file_path):
@@ -45,9 +43,9 @@ def apply_diff_to_branch(target_branch, diff):
     with open(json_file_path, "w") as f:
         f.write(json.dumps(data))
 
+    execute_command("rm temp_diff.txt")
     execute_command(f"git add .")
     execute_command(f"git commit -m 'Applied changes from diff'")
-    execute_command("rm temp_diff.txt")
 
 if __name__ == "__main__":
     BASE_BRANCH = 'main'
@@ -57,8 +55,7 @@ if __name__ == "__main__":
 
     # Bブランチの差分をAブランチにマージ
     diff_B_to_A = get_diff(BASE_BRANCH, FEATURE_BRANCH, json_file_path)
-    print(diff_B_to_A)
-    # apply_diff_to_branch("A", diff_B_to_A)
+    apply_diff_to_branch(BASE_BRANCH, diff_B_to_A)
 
     # Aブランチの差分をmainブランチにマージ
     # diff_A_to_main = get_diff("main", "A", json_file_path)
